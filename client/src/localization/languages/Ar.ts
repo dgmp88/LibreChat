@@ -56,6 +56,8 @@ export default {
   com_ui_create_link: 'إنشاء رابط',
   com_ui_share_link_to_chat: 'شارك الرابط في الدردشة',
   com_ui_share_error: 'حدث خطأ أثناء مشاركة رابط الدردشة',
+  com_ui_share_retrieve_error: 'حدث خطأ أثناء حذف الرابط المشترك.',
+  com_ui_share_delete_error: 'حدث خطأ أثناء حذف الرابط المشترك.',
   com_ui_share_create_message: 'سيظل اسمك وأي رسائل تضيفها بعد المشاركة خاصة.',
   com_ui_share_created_message:
     'تم إنشاء رابط مشترك للدردشة الخاصة بك. يمكنك إدارة الدردشات المشتركة مسبقًا في أي وقت عبر الإعدادات.',
@@ -467,7 +469,6 @@ export default {
   com_ui_max_tags: 'الحد الأقصى المسموح به هو {0}، باستخدام أحدث القيم.',
   com_auth_back_to_login: 'العودة إلى تسجيل الدخول',
   com_endpoint_message: 'رسالة',
-  com_endpoint_messages: 'رسائل',
   com_endpoint_message_not_appendable: 'عدّل رسالتك أو أعد إنشاءها.',
   com_endpoint_context_tokens: 'الحد الأقصى لرموز السياق',
   com_endpoint_context_info:
@@ -782,6 +783,14 @@ export const comparisons = {
   com_ui_share_link_to_chat: {
     english: 'Share link to chat',
     translated: 'شارك الرابط في الدردشة',
+  },
+  com_ui_share_retrieve_error: {
+    english: 'There was an error deleting the shared link.',
+    translated: 'حدث خطأ أثناء حذف الرابط المشترك.',
+  },
+  com_ui_share_delete_error: {
+    english: 'There was an error deleting the shared link.',
+    translated: 'حدث خطأ أثناء حذف الرابط المشترك.',
   },
   com_ui_share_error: {
     english: 'There was an error sharing the chat link',
@@ -2283,10 +2292,6 @@ export const comparisons = {
   com_endpoint_message: {
     english: 'Message',
     translated: 'رسالة',
-  },
-  com_endpoint_messages: {
-    english: 'Messages',
-    translated: 'رسائل',
   },
   com_endpoint_message_not_appendable: {
     english: 'Edit your message or Regenerate.',

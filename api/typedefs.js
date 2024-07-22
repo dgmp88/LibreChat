@@ -466,6 +466,12 @@
  */
 
 /**
+ * @exports TBaseEndpoint
+ * @typedef {import('librechat-data-provider').TBaseEndpoint} TBaseEndpoint
+ * @memberof typedefs
+ */
+
+/**
  * @exports TEndpoint
  * @typedef {import('librechat-data-provider').TEndpoint} TEndpoint
  * @memberof typedefs
@@ -1440,5 +1446,12 @@
 /**
  * @exports TForkConvoRequest
  * @typedef {import('librechat-data-provider').TForkConvoRequest} TForkConvoRequest
+ * @memberof typedefs
+ */
+
+/** Clients */
+
+/**
+ * @typedef {Promise<{ message: TMessage, conversation: TConversation }> | undefined} ClientDatabaseSavePromise
  * @memberof typedefs
  */

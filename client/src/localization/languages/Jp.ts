@@ -152,6 +152,8 @@ export default {
   com_ui_create_link: 'リンクを作成する',
   com_ui_share_link_to_chat: 'チャットへの共有リンク',
   com_ui_share_error: 'チャットの共有リンクの共有中にエラーが発生しました',
+  com_ui_share_retrieve_error: '共有リンクの削除中にエラーが発生しました。',
+  com_ui_share_delete_error: '共有リンクの削除中にエラーが発生しました。',
   com_ui_share_create_message:
     'あなたの名前と共有リンクを作成した後のメッセージは、共有されません。',
   com_ui_share_created_message:
@@ -542,7 +544,6 @@ export default {
   com_ui_mention:
     'エンドポイント、アシスタント、またはプリセットを素早く切り替えるには、それらを言及してください。',
   com_ui_import_conversation_file_type_error: 'サポートされていないインポート形式です',
-  com_endpoint_messages: 'メッセージ',
   com_endpoint_context_tokens: 'コンテキストトークン数の最大値',
   com_endpoint_context_info:
     'コンテキストに使用できるトークンの最大数です。リクエストごとに送信されるトークン数を制御するために使用します。指定しない場合は、既知のモデルのコンテキストサイズに基づいてシステムのデフォルト値が使用されます。高い値を設定すると、エラーが発生したり、トークンコストが高くなる可能性があります。',
@@ -562,7 +563,7 @@ export default {
   com_nav_lang_polish: 'ポーランド語',
   com_nav_lang_brazilian_portuguese: 'ブラジルポルトガル語',
   com_nav_lang_russian: 'ロシア語',
-  com_nav_lang_japanese: 'ナビゲーションメニュー',
+  com_nav_lang_japanese: '日本語',
   com_nav_lang_swedish: 'スウェーデン語',
   com_nav_lang_korean: '韓国語',
   com_nav_lang_vietnamese: 'ベトナム語',
@@ -1139,6 +1140,14 @@ export const comparisons = {
   com_ui_share_link_to_chat: {
     english: 'Share link to chat',
     translated: 'チャットへの共有リンク',
+  },
+  com_ui_share_retrieve_error: {
+    english: 'There was an error deleting the shared link.',
+    translated: '共有リンクの削除中にエラーが発生しました。',
+  },
+  com_ui_share_delete_error: {
+    english: 'There was an error deleting the shared link.',
+    translated: '共有リンクの削除中にエラーが発生しました。',
   },
   com_ui_share_error: {
     english: 'There was an error sharing the chat link',
@@ -2558,10 +2567,6 @@ export const comparisons = {
     english: 'Unsupported import type',
     translated: 'サポートされていないインポート形式です',
   },
-  com_endpoint_messages: {
-    english: 'Messages',
-    translated: 'メッセージ',
-  },
   com_endpoint_context_tokens: {
     english: 'Max Context Tokens',
     translated: 'コンテキストトークン数の最大値',
@@ -2636,7 +2641,7 @@ export const comparisons = {
   },
   com_nav_lang_japanese: {
     english: '日本語',
-    translated: 'ナビゲーションメニュー',
+    translated: '日本語',
   },
   com_nav_lang_swedish: {
     english: 'Svenska',

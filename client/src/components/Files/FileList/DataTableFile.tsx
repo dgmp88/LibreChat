@@ -32,7 +32,7 @@ import {
   DropdownMenuTrigger,
 } from '~/components/ui';
 import { useDeleteFilesFromTable } from '~/hooks/Files';
-import { NewTrashIcon, Spinner } from '~/components/svg';
+import { TrashIcon, Spinner } from '~/components/svg';
 import useLocalize from '~/hooks/useLocalize';
 import ActionButton from '../ActionButton';
 import UploadFileButton from './UploadFileButton';
@@ -106,13 +106,13 @@ export default function DataTableFile<TData, TValue>({
                 deleteFiles({ files: filesToDelete as TFile[] });
                 setRowSelection({});
               }}
-              className="dark:hover:bg-gray-850/25 ml-1 gap-2 sm:ml-0"
+              className="ml-1 gap-2 dark:hover:bg-gray-850/25 sm:ml-0"
               disabled={!table.getFilteredSelectedRowModel().rows.length || isDeleting}
             >
               {isDeleting ? (
                 <Spinner className="h-4 w-4" />
               ) : (
-                <NewTrashIcon className="h-4 w-4 text-red-400" />
+                <TrashIcon className="h-4 w-4 text-red-400" />
               )}
               {localize('com_ui_delete')}
             </Button>

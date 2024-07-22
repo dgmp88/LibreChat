@@ -1,18 +1,19 @@
 import { useRecoilState } from 'recoil';
+import HoverCardSettings from '../HoverCardSettings';
 import { Switch } from '~/components/ui';
-import { useLocalize } from '~/hooks';
+import useLocalize from '~/hooks/useLocalize';
 import store from '~/store';
 
-export default function ShowCodeSwitch({
+export default function SaveDraft({
   onCheckedChange,
 }: {
   onCheckedChange?: (value: boolean) => void;
 }) {
-  const [showCode, setShowCode] = useRecoilState<boolean>(store.showCode);
+  const [saveDrafts, setSaveDrafts] = useRecoilState<boolean>(store.saveDrafts);
   const localize = useLocalize();
 
   const handleCheckedChange = (value: boolean) => {
-    setShowCode(value);
+    setSaveDrafts(value);
     if (onCheckedChange) {
       onCheckedChange(value);
     }
@@ -20,13 +21,16 @@ export default function ShowCodeSwitch({
 
   return (
     <div className="flex items-center justify-between">
-      <div> {localize('com_nav_show_code')} </div>
+      <div className="flex items-center space-x-2">
+        <div>{localize('com_nav_save_drafts')}</div>
+        <HoverCardSettings side="bottom" text="com_nav_info_save_draft" />
+      </div>
       <Switch
-        id="showCode"
-        checked={showCode}
+        id="saveDrafts"
+        checked={saveDrafts}
         onCheckedChange={handleCheckedChange}
         className="ml-4 mt-2"
-        data-testid="showCode"
+        data-testid="saveDrafts"
       />
     </div>
   );

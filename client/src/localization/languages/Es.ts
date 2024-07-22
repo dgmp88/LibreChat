@@ -142,6 +142,8 @@ export default {
   com_ui_create_link: 'Crear enlace',
   com_ui_share_link_to_chat: 'Compartir enlace en el chat',
   com_ui_share_error: 'Hubo un error al compartir el enlace del chat',
+  com_ui_share_retrieve_error: 'Hubo un error al eliminar el enlace compartido.',
+  com_ui_share_delete_error: 'Hubo un error al eliminar el enlace compartido.',
   com_ui_share_create_message:
     'Tu nombre y cualquier mensaje que agregues después de compartir se mantendrán privados.',
   com_ui_share_created_message:
@@ -537,7 +539,6 @@ export default {
   com_ui_import_conversation_file_type_error:
     'com_ui_import_conversation_file_type_error: Tipo de archivo no compatible para importar',
   com_ui_min_tags: 'No se pueden eliminar más valores, se requiere un mínimo de {0}.',
-  com_endpoint_messages: 'Mensajes',
   com_endpoint_context_tokens: 'Máximo de tokens de contexto',
   com_endpoint_stop_placeholder: 'Separe los valores presionando `Intro`',
   com_error_no_base_url:
@@ -1123,6 +1124,14 @@ export const comparisons = {
   com_ui_share_link_to_chat: {
     english: 'Share link to chat',
     translated: 'Compartir enlace en el chat',
+  },
+  com_ui_share_retrieve_error: {
+    english: 'There was an error deleting the shared link.',
+    translated: 'Hubo un error al eliminar el enlace compartido.',
+  },
+  com_ui_share_delete_error: {
+    english: 'There was an error deleting the shared link.',
+    translated: 'Hubo un error al eliminar el enlace compartido.',
   },
   com_ui_share_error: {
     english: 'There was an error sharing the chat link',
@@ -2502,10 +2511,6 @@ export const comparisons = {
   com_ui_min_tags: {
     english: 'Cannot remove more values, a minimum of {0} are required.',
     translated: 'No se pueden eliminar más valores, se requiere un mínimo de {0}.',
-  },
-  com_endpoint_messages: {
-    english: 'Messages',
-    translated: 'Mensajes',
   },
   com_endpoint_context_tokens: {
     english: 'Max Context Tokens',

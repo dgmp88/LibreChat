@@ -355,6 +355,10 @@ export const getVoices = (): Promise<f.VoiceResponse> => {
   return request.get(endpoints.textToSpeechVoices());
 };
 
+export const getCustomConfigSpeech = (): Promise<t.TCustomConfigSpeechResponse> => {
+  return request.get(endpoints.getCustomConfigSpeech());
+};
+
 /* actions */
 
 export const updateAction = (data: m.UpdateActionVariables): Promise<m.UpdateActionResponse> => {
@@ -473,6 +477,10 @@ export function getPrompt(id: string): Promise<{ prompt: t.TPrompt }> {
 
 export function getPrompts(filter: t.TPromptsWithFilterRequest): Promise<t.TPrompt[]> {
   return request.get(endpoints.getPromptsWithFilters(filter));
+}
+
+export function getAllPromptGroups(): Promise<q.AllPromptGroupsResponse> {
+  return request.get(endpoints.getAllPromptGroups());
 }
 
 export function getPromptGroups(

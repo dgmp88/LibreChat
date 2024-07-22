@@ -71,6 +71,8 @@ export default {
   com_ui_create_link: 'Создать ссылку',
   com_ui_share_link_to_chat: 'Поделиться ссылкой в чате',
   com_ui_share_error: 'Произошла ошибка при попытке поделиться ссылкой на чат',
+  com_ui_share_retrieve_error: 'Произошла ошибка при удалении общей ссылки.',
+  com_ui_share_delete_error: 'Произошла ошибка при удалении общей ссылки.',
   com_ui_share_create_message:
     'Ваше имя и любые сообщения, которые вы добавите после обмена, останутся конфиденциальными.',
   com_ui_share_created_message:
@@ -516,7 +518,6 @@ export default {
   com_ui_terms_of_service: 'Условия использования',
   com_ui_min_tags: 'Нельзя удалить больше значений, требуется минимум {0}.',
   com_ui_max_tags: 'Максимально допустимое количество - {0}, используются последние значения.',
-  com_endpoint_messages: 'Сообщения',
   com_endpoint_context_tokens: 'Максимальное количество контекстных токенов',
   com_endpoint_context_info:
     'Максимальное количество токенов, которое может быть использовано для контекста. Используется для контроля количества токенов, отправляемых за один запрос. Если не указано, будут использованы системные значения по умолчанию, основанные на известном размере контекста моделей. Установка более высоких значений может привести к ошибкам и/или более высокой стоимости токенов.',
@@ -853,6 +854,14 @@ export const comparisons = {
   com_ui_share_link_to_chat: {
     english: 'Share link to chat',
     translated: 'Поделиться ссылкой в чате',
+  },
+  com_ui_share_retrieve_error: {
+    english: 'There was an error deleting the shared link.',
+    translated: 'Произошла ошибка при удалении общей ссылки.',
+  },
+  com_ui_share_delete_error: {
+    english: 'There was an error deleting the shared link.',
+    translated: 'Произошла ошибка при удалении общей ссылки.',
   },
   com_ui_share_error: {
     english: 'There was an error sharing the chat link',
@@ -2455,10 +2464,6 @@ export const comparisons = {
   com_ui_max_tags: {
     english: 'Maximum number allowed is {0}, using latest values.',
     translated: 'Максимально допустимое количество - {0}, используются последние значения.',
-  },
-  com_endpoint_messages: {
-    english: 'Messages',
-    translated: 'Сообщения',
   },
   com_endpoint_context_tokens: {
     english: 'Max Context Tokens',

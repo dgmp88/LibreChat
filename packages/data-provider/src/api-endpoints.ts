@@ -128,13 +128,17 @@ export const images = () => `${files()}/images`;
 
 export const avatar = () => `${images()}/avatar`;
 
-export const speechToText = () => `${files()}/stt`;
+export const speech = () => `${files()}/speech`;
 
-export const textToSpeech = () => `${files()}/tts`;
+export const speechToText = () => `${speech()}/stt`;
+
+export const textToSpeech = () => `${speech()}/tts`;
 
 export const textToSpeechManual = () => `${textToSpeech()}/manual`;
 
 export const textToSpeechVoices = () => `${textToSpeech()}/voices`;
+
+export const getCustomConfigSpeech = () => `${speech()}/config/get`;
 
 export const getPromptGroup = (_id: string) => `${prompts()}/groups/${_id}`;
 
@@ -176,6 +180,8 @@ export const deletePrompt = ({ _id, groupId }: { _id: string; groupId: string })
 };
 
 export const getCategories = () => '/api/categories';
+
+export const getAllPromptGroups = () => `${prompts()}/all`;
 
 /* Roles */
 export const roles = () => '/api/roles';

@@ -7,9 +7,9 @@ export default {
     'It appears that the content submitted has been flagged by our moderation system for not aligning with our community guidelines. We\'re unable to proceed with this specific topic. If you have any other questions or topics you\'d like to explore, please edit your message, or create a new conversation.',
   com_error_no_user_key: 'No key found. Please provide a key and try again.',
   com_error_no_base_url: 'No base URL found. Please provide one and try again.',
-  com_error_invalid_user_key: 'Invalid key provided. Please provide a key and try again.',
+  com_error_invalid_user_key: 'Invalid key provided. Please provide a valid key and try again.',
   com_error_expired_user_key:
-    'Provided key for {0} expired at {1}. Please provide a key and try again.',
+    'Provided key for {0} expired at {1}. Please provide a new key and try again.',
   com_files_no_results: 'No results.',
   com_files_filter: 'Filter files...',
   com_files_number_selected: '{0} of {1} file(s) selected',
@@ -22,7 +22,9 @@ export default {
   com_assistants_capabilities: 'Capabilities',
   com_assistants_file_search: 'File Search',
   com_assistants_file_search_info:
-    'Attaching vector stores for File Search is not yet supported. You can attach them from the Provider Playground or attach files to messages for file search on a thread basis.',
+    'File search enables the assistant with knowledge from files that you or your users upload. Once a file is uploaded, the assistant automatically decides when to retrieve content based on user requests. Attaching vector stores for File Search is not yet supported. You can attach them from the Provider Playground or attach files to messages for file search on a thread basis.',
+  com_assistants_code_interpreter_info:
+    'Code Interpreter enables the assistant to write and run code. This tool can process files with diverse data and formatting, and generate files such as graphs.',
   com_assistants_knowledge: 'Knowledge',
   com_assistants_knowledge_info:
     'If you upload files under Knowledge, conversations with your Assistant may include file contents.',
@@ -30,8 +32,7 @@ export default {
     'Assistant must be created, and Code Interpreter or Retrieval must be enabled and saved before uploading files as Knowledge.',
   com_assistants_image_vision: 'Image Vision',
   com_assistants_code_interpreter: 'Code Interpreter',
-  com_assistants_code_interpreter_files:
-    'The following files are only available for Code Interpreter:',
+  com_assistants_code_interpreter_files: 'Files below are for Code Interpreter only:',
   com_assistants_retrieval: 'Retrieval',
   com_assistants_search_name: 'Search assistants by name',
   com_assistants_tools: 'Tools',
@@ -130,13 +131,14 @@ export default {
   com_ui_admin_settings: 'Admin Settings',
   com_ui_error_save_admin_settings: 'There was an error saving your admin settings.',
   com_ui_prompt_preview_not_shared: 'The author has not allowed collaboration for this prompt.',
-  com_ui_is_required: '{0} is required',
-  com_ui_text_prompt: 'Text',
+  com_ui_prompt_name_required: 'Prompt Name is required',
+  com_ui_prompt_text_required: 'Text is required',
+  com_ui_prompt_text: 'Text',
   com_ui_back_to_chat: 'Back to Chat',
-  com_ui_back_to_var: 'Back to {0}',
+  com_ui_back_to_prompts: 'Back to Prompts',
   com_ui_categories: 'Categories',
   com_ui_filter_prompts_name: 'Filter prompts by name',
-  com_ui_search_var: 'Search {0}',
+  com_ui_search_categories: 'Search Categories',
   com_ui_manage: 'Manage',
   com_ui_variables: 'Variables',
   com_ui_variables_info:
@@ -148,6 +150,7 @@ export default {
   com_ui_entries: 'Entries',
   com_ui_pay_per_call: 'All AI conversations in one place. Pay per call and not per month',
   com_ui_new_footer: 'All AI conversations in one place.',
+  com_ui_latest_footer: 'Every AI for Everyone.',
   com_ui_enter: 'Enter',
   com_ui_submit: 'Submit',
   com_ui_none_selected: 'None selected',
@@ -196,6 +199,7 @@ export default {
   com_ui_fork_visible: 'Visible messages only',
   com_ui_fork_from_message: 'Select a fork option',
   com_ui_mention: 'Mention an endpoint, assistant, or preset to quickly switch to it',
+  com_ui_add: 'Add a model or preset for an additional response',
   com_ui_regenerate: 'Regenerate',
   com_ui_continue: 'Continue',
   com_ui_edit: 'Edit',
@@ -229,7 +233,7 @@ export default {
   com_ui_assistants_output: 'Assistants Output',
   com_ui_delete: 'Delete',
   com_ui_create: 'Create',
-  com_ui_create_var: 'Create {0}',
+  com_ui_create_prompt: 'Create Prompt',
   com_ui_share: 'Share',
   com_ui_share_var: 'Share {0}',
   com_ui_copy_link: 'Copy link',
@@ -243,11 +247,16 @@ export default {
   com_ui_prompts_allow_create: 'Allow creating Prompts',
   com_ui_prompts_allow_share_global: 'Allow sharing Prompts to all users',
   com_ui_prompt_shared_to_all: 'This prompt is shared to all users',
+  com_ui_prompt_update_error: 'There was an error updating the prompt',
   com_ui_prompt_already_shared_to_all: 'This prompt is already shared to all users',
-  com_ui_description_placeholder: 'Optional: Enter a description to display in the prompt',
+  com_ui_description_placeholder: 'Optional: Enter a description to display for the prompt',
+  com_ui_command_placeholder: 'Optional: Enter a command for the prompt or name will be used.',
+  com_ui_command_usage_placeholder: 'Select a Prompt by command or name',
   com_ui_no_prompt_description: 'No description found.',
   com_ui_share_link_to_chat: 'Share link to chat',
   com_ui_share_error: 'There was an error sharing the chat link',
+  com_ui_share_retrieve_error: 'There was an error retrieving the shared links',
+  com_ui_share_delete_error: 'There was an error deleting the shared link',
   com_ui_share_create_message: 'Your name and any messages you add after sharing stay private.',
   com_ui_share_created_message:
     'A shared link to your chat has been created. Manage previously shared chats at any time via Settings.',
@@ -258,6 +267,10 @@ export default {
   com_ui_shared_link_not_found: 'Shared link not found',
   com_ui_delete_conversation: 'Delete chat?',
   com_ui_delete_confirm: 'This will delete',
+  com_ui_delete_tool: 'Delete Tool',
+  com_ui_delete_tool_confirm: 'Are you sure you want to delete this tool?',
+  com_ui_delete_action: 'Delete Action',
+  com_ui_delete_action_confirm: 'Are you sure you want to delete this action?',
   com_ui_delete_confirm_prompt_version_var:
     'This will delete the selected version for "{0}." If no other versions exist, the prompt will be deleted.',
   com_ui_delete_assistant_confirm:
@@ -363,7 +376,6 @@ export default {
     'WARNING: Misuse of this feature can get you BANNED from using Bing! Click on \'System Message\' for full instructions and the default message if omitted, which is the \'Sydney\' preset that is considered safe.',
   com_endpoint_system_message: 'System Message',
   com_endpoint_message: 'Message',
-  com_endpoint_messages: 'Messages',
   com_endpoint_message_not_appendable: 'Edit your message or Regenerate.',
   com_endpoint_default_blank: 'default: blank',
   com_endpoint_default_false: 'default: false',
@@ -384,7 +396,7 @@ export default {
   com_endpoint_google_topk:
     'Top-k changes how the model selects tokens for output. A top-k of 1 means the selected token is the most probable among all tokens in the model\'s vocabulary (also called greedy decoding), while a top-k of 3 means that the next token is selected from among the 3 most probable tokens (using temperature).',
   com_endpoint_google_maxoutputtokens:
-    ' 	Maximum number of tokens that can be generated in the response. Specify a lower value for shorter responses and a higher value for longer responses.',
+    'Maximum number of tokens that can be generated in the response. Specify a lower value for shorter responses and a higher value for longer responses. Note: models may stop before reaching this maximum.',
   com_endpoint_google_custom_name_placeholder: 'Set a custom name for Google',
   com_endpoint_prompt_prefix_placeholder: 'Set custom instructions or context. Ignored if empty.',
   com_endpoint_instructions_assistants_placeholder:
@@ -432,7 +444,7 @@ export default {
   com_endpoint_anthropic_topk:
     'Top-k changes how the model selects tokens for output. A top-k of 1 means the selected token is the most probable among all tokens in the model\'s vocabulary (also called greedy decoding), while a top-k of 3 means that the next token is selected from among the 3 most probable tokens (using temperature).',
   com_endpoint_anthropic_maxoutputtokens:
-    'Maximum number of tokens that can be generated in the response. Specify a lower value for shorter responses and a higher value for longer responses.',
+    'Maximum number of tokens that can be generated in the response. Specify a lower value for shorter responses and a higher value for longer responses. Note: models may stop before reaching this maximum.',
   com_endpoint_anthropic_custom_name_placeholder: 'Set a custom name for Anthropic',
   com_endpoint_frequency_penalty: 'Frequency Penalty',
   com_endpoint_presence_penalty: 'Presence Penalty',
@@ -499,6 +511,7 @@ export default {
   com_endpoint_config_value: 'Enter value for',
   com_endpoint_config_key_name_placeholder: 'Set API key first',
   com_endpoint_config_key_encryption: 'Your key will be encrypted and deleted at',
+  com_endpoint_config_key_never_expires: 'Your key will never expire',
   com_endpoint_config_key_expiry: 'the expiry time',
   com_endpoint_config_click_here: 'Click Here',
   com_endpoint_config_google_service_key: 'Google Service Account Key',
@@ -531,7 +544,7 @@ export default {
   com_nav_modular_chat: 'Enable switching Endpoints mid-conversation',
   com_nav_latex_parsing: 'Parsing LaTeX in messages (may affect performance)',
   com_nav_text_to_speech: 'Text to Speech',
-  com_nav_automatic_playback: 'Autoplay Latest Message (external only)',
+  com_nav_automatic_playback: 'Autoplay Latest Message',
   com_nav_speech_to_text: 'Speech to Text',
   com_nav_profile_picture: 'Profile Picture',
   com_nav_change_picture: 'Change picture',
@@ -550,6 +563,9 @@ export default {
   com_ui_code: 'Code',
   com_ui_travel: 'Travel',
   com_ui_teach_or_explain: 'Learning',
+  com_ui_select_file: 'Select a file',
+  com_ui_drag_drop_file: 'Drag and drop a file here',
+  com_ui_upload_image: 'Upload an image',
   com_ui_select_a_category: 'No category selected',
   com_nav_tool_dialog_description: 'Assistant must be saved to persist tool selections.',
   com_show_agent_settings: 'Show Agent Settings',
@@ -585,6 +601,7 @@ export default {
   com_nav_enter_to_send: 'Press Enter to send messages',
   com_nav_user_name_display: 'Display username in messages',
   com_nav_save_drafts: 'Save drafts locally',
+  com_nav_chat_direction: 'Chat direction',
   com_nav_show_code: 'Always show code when using code interpreter',
   com_nav_auto_send_prompts: 'Auto-send Prompts',
   com_nav_always_make_prod: 'Always make new versions production',
@@ -601,7 +618,7 @@ export default {
   com_nav_archive_all_chats: 'Archive all chats',
   com_nav_archive_all: 'Archive all',
   com_nav_archive_name: 'Name',
-  com_nav_archive_created_at: 'DateCreated',
+  com_nav_archive_created_at: 'Date Archived',
   com_nav_clear_conversation: 'Clear conversations',
   com_nav_clear_conversation_confirm_message:
     'Are you sure you want to clear all conversations? This is irreversible.',
@@ -616,7 +633,8 @@ export default {
   com_nav_delete_warning: 'WARNING: This will permanently delete your account.',
   com_nav_delete_data_info: 'All your data will be deleted.',
   com_nav_conversation_mode: 'Conversation Mode',
-  com_nav_auto_send_text: 'Auto send text (after 3 sec)',
+  com_nav_auto_send_text: 'Auto send text',
+  com_nav_auto_send_text_disabled: 'set -1 to disable',
   com_nav_auto_transcribe_audio: 'Auto transcribe audio',
   com_nav_db_sensitivity: 'Decibel sensitivity',
   com_nav_playback_rate: 'Audio Playback Rate',
@@ -626,10 +644,28 @@ export default {
   com_nav_engine: 'Engine',
   com_nav_browser: 'Browser',
   com_nav_external: 'External',
-  com_nav_delete_cache_storage: 'Delete cache storage',
+  com_nav_delete_cache_storage: 'Delete TTS cache storage',
   com_nav_enable_cache_tts: 'Enable cache TTS',
   com_nav_voice_select: 'Voice',
+  com_nav_enable_cloud_browser_voice: 'Use cloud-based voices',
+  com_nav_info_enter_to_send:
+    'When enabled, pressing `ENTER` will send your message. When disabled, pressing Enter will add a new line, and you\'ll need to press `CTRL + ENTER` to send your message.',
+  com_nav_info_save_draft:
+    'When enabled, the text and attachments you enter in the chat form will be automatically saved locally as drafts. These drafts will be available even if you reload the page or switch to a different conversation. Drafts are stored locally on your device and are deleted once the message is sent.',
+  com_nav_info_fork_change_default:
+    '`Visible messages only` includes just the direct path to the selected message. `Include related branches` adds branches along the path. `Include all to/from here` includes all connected messages and branches.',
+  com_nav_info_fork_split_target_setting:
+    'When enabled, forking will commence from the target message to the latest message in the conversation, according to the behavior selected.',
+  com_nav_info_user_name_display:
+    'When enabled, the username of the sender will be shown above each message you send. When disabled, you will only see "You" above your messages.',
+  com_nav_info_latex_parsing:
+    'When enabled, LaTeX code in messages will be rendered as mathematical equations. Disabling this may improve performance if you don\'t need LaTeX rendering.',
+  com_nav_info_revoke:
+    'This action will revoke and remove all the API keys that you have provided. You will need to re-enter these credentials to continue using those endpoints.',
+  com_nav_info_delete_cache_storage:
+    'This action will delete all cached TTS (Text-to-Speech) audio files stored on your device. Cached audio files are used to speed up playback of previously generated TTS audio, but they can consume storage space on your device.',
   com_nav_setting_general: 'General',
+  com_nav_setting_chat: 'Chat',
   com_nav_setting_beta: 'Beta features',
   com_nav_setting_data: 'Data controls',
   com_nav_setting_account: 'Account',
@@ -655,4 +691,5 @@ export default {
   com_nav_lang_dutch: 'Nederlands',
   com_nav_lang_indonesia: 'Indonesia',
   com_nav_lang_hebrew: 'עברית',
+  com_nav_lang_finnish: 'Suomi',
 };

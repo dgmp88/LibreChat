@@ -423,6 +423,13 @@ export const useVoicesQuery = (): UseQueryResult<t.VoiceResponse> => {
   return useQuery([QueryKeys.voices], () => dataService.getVoices());
 };
 
+/* Custom config speech */
+export const useCustomConfigSpeechQuery = (): UseQueryResult<t.getCustomConfigSpeechResponse> => {
+  return useQuery([QueryKeys.customConfigSpeech], () => dataService.getCustomConfigSpeech());
+};
+
+/** Prompt */
+
 export const usePromptGroupsInfiniteQuery = (
   params?: t.TPromptGroupsWithFilterRequest,
   config?: UseInfiniteQueryOptions<t.PromptGroupListResponse, unknown>,
@@ -484,6 +491,23 @@ export const useGetPrompts = (
       retry: false,
       ...config,
       enabled: config?.enabled !== undefined ? config?.enabled : true,
+    },
+  );
+};
+
+export const useGetAllPromptGroups = <TData = t.AllPromptGroupsResponse>(
+  filter?: t.AllPromptGroupsFilterRequest,
+  config?: UseQueryOptions<t.AllPromptGroupsResponse, unknown, TData>,
+): QueryObserverResult<TData> => {
+  return useQuery<t.AllPromptGroupsResponse, unknown, TData>(
+    [QueryKeys.allPromptGroups],
+    () => dataService.getAllPromptGroups(),
+    {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMount: false,
+      retry: false,
+      ...config,
     },
   );
 };
