@@ -14,9 +14,10 @@ import store from '~/store';
 type BookmarkNavProps = {
   tags: string[];
   setTags: (tags: string[]) => void;
+  isSmallScreen: boolean;
 };
 
-const BookmarkNav: FC<BookmarkNavProps> = ({ tags, setTags }: BookmarkNavProps) => {
+const BookmarkNav: FC<BookmarkNavProps> = ({ tags, setTags, isSmallScreen }: BookmarkNavProps) => {
   const localize = useLocalize();
   const location = useLocation();
 
@@ -40,17 +41,20 @@ const BookmarkNav: FC<BookmarkNavProps> = ({ tags, setTags }: BookmarkNavProps) 
             className={cn(
               'mt-text-sm flex h-10 w-full items-center gap-2 rounded-lg p-2 text-sm transition-colors duration-200 hover:bg-surface-hover',
               open ? 'bg-surface-hover' : '',
+              isSmallScreen ? 'h-14 rounded-2xl' : '',
             )}
             data-testid="bookmark-menu"
           >
-            <div className="relative flex h-8 w-8 items-center justify-center rounded-full p-1 text-text-primary">
-              {tags.length > 0 ? (
-                <BookmarkFilledIcon className="h-5 w-5" />
-              ) : (
-                <BookmarkIcon className="h-5 w-5" />
-              )}
+            <div className="h-7 w-7 flex-shrink-0">
+              <div className="relative flex h-full items-center justify-center rounded-full border border-border-medium bg-surface-primary-alt text-text-primary">
+                {tags.length > 0 ? (
+                  <BookmarkFilledIcon className="h-4 w-4" />
+                ) : (
+                  <BookmarkIcon className="h-4 w-4" />
+                )}
+              </div>
             </div>
-            <div className="grow overflow-hidden whitespace-nowrap text-left text-sm text-text-primary">
+            <div className="grow overflow-hidden whitespace-nowrap text-left text-sm font-medium text-text-primary">
               {tags.length > 0 ? tags.join(', ') : localize('com_ui_bookmarks')}
             </div>
           </MenuButton>

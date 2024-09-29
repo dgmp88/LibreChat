@@ -44,11 +44,37 @@ html {
   --surface-secondary: var(--gray-50);
   --surface-tertiary: var(--gray-100);
   --surface-tertiary-alt: var(--white);
+  --surface-dialog: var(--white);
   --border-light: var(--gray-200);
   --border-medium-alt: var(--gray-300);
   --border-medium: var(--gray-300);
   --border-heavy: var(--gray-400);
   --border-xheavy: var(--gray-500);
+  /* These are test styles */
+
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
 }
 .dark {
   --text-primary: var(--gray-100);
@@ -66,11 +92,36 @@ html {
   --surface-secondary: var(--gray-800);
   --surface-tertiary: var(--gray-700);
   --surface-tertiary-alt: var(--gray-700);
+  --surface-dialog: var(--gray-850);
   --border-light: var(--gray-700);
   --border-medium-alt: var(--gray-600);
   --border-medium: var(--gray-600);
   --border-heavy: var(--gray-500);
   --border-xheavy: var(--gray-400);
+  /* These are test styles */
+
+  --background: 0 0% 7%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
 }
 .gizmo {
   --text-primary: var(--gizmo-gray-950);
@@ -639,12 +690,6 @@ pre {
 .prose :where(thead th strong):not(:where([class~='not-prose'] *)) {
   color: inherit;
 }
-.prose :where(ul):not(:where([class~='not-prose'] *)) {
-  list-style-type: disc;
-  margin-bottom: 0.1em;
-  margin-top: 0.1em;
-  padding-left: 1.625em;
-}
 .prose :where(ul > li):not(:where([class~='not-prose'] *))::marker {
   color: var(--tw-prose-bullets);
 }
@@ -1178,17 +1223,25 @@ button {
 .btn-neutral {
   --tw-bg-opacity: 1;
   --tw-text-opacity: 1;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  background-color: var(--surface-secondary);
   border-color: rgba(0, 0, 0, 0.1);
   border-width: 1px;
   color: rgba(64, 65, 79, var(--tw-text-opacity));
   font-size: 0.875rem;
   line-height: 1.25rem;
+  transition: all 0.1s ease-in-out;
 }
+
 .btn-neutral:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(236, 236, 241, var(--tw-bg-opacity));
 }
+
+.btn-neutral:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring-primary);
+}
+
 .dark .btn-neutral {
   --tw-border-opacity: 1;
   --tw-bg-opacity: 1;
@@ -1197,9 +1250,14 @@ button {
   border-color: rgba(66, 66, 66, var(--tw-border-opacity));
   color: rgba(255, 255, 240, var(--tw-text-opacity));
 }
+
 .dark .btn-neutral:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(66, 66, 66, var(--tw-bg-opacity));
+}
+
+.dark .btn-neutral:focus {
+  box-shadow: 0 0 0 2px var(--ring-primary);
 }
 .btn-small {
   padding: 0.25rem 0.5rem;
@@ -1255,20 +1313,6 @@ html {
   height: 100%;
 }
 
-.markdown ul li {
-  display: block;
-  margin: 0;
-  position: relative;
-}
-
-.markdown ul li:before {
-  content: '•';
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  margin-left: -1rem;
-  position: absolute;
-}
-
 .markdown {
   max-width: none;
   font-size: var(--markdown-font-size, var(--font-size-base));
@@ -1315,13 +1359,6 @@ html {
   border-color: rgba(142, 142, 160, var(--tw-border-opacity));
   border-left-width: 2px;
   line-height: 1rem;
-  padding-left: 1rem;
-}
-
-/* .markdown ol, */
-.markdown ul {
-  display: flex;
-  flex-direction: column;
   padding-left: 1rem;
 }
 
@@ -1539,18 +1576,6 @@ html {
   height: 100%;
 }
 
-.markdown ul li {
-  display: block;
-  margin: 0;
-  position: relative;
-}
-.markdown ul li:before {
-  content: '•';
-  font-size: calc(var(--markdown-font-size) * 0.875);
-  line-height: calc(var(--markdown-font-size) * 1.25);
-  margin-left: -1rem;
-  position: absolute;
-}
 .markdown {
   max-width: none;
 }
@@ -1742,7 +1767,7 @@ button.scroll-convo {
     transform: scale3d(1.25, 1.25, 1);
   }
 }
-.result-thinking:empty:last-child:after {
+.submitting .result-thinking:empty:last-child:after {
   -webkit-font-smoothing: subpixel-antialiased;
   -webkit-animation: pulseSize 1.25s ease-in-out infinite;
   animation: pulseSize 1.25s ease-in-out infinite;
@@ -1829,103 +1854,7 @@ button.scroll-convo {
 }
 
 @supports (selector(:has(*))) {
-  .result-streaming > ol:last-child > li:last-child > ol:last-child > li:last-child:after,
-  .result-streaming
-    > ol:last-child
-    > li:last-child
-    > ol:last-child
-    > li:last-child
-    > ol:last-child
-    > li:last-child:after,
-  .result-streaming
-    > ol:last-child
-    > li:last-child
-    > ol:last-child
-    > li:last-child
-    > ul:last-child
-    > li:last-child:after,
-  .result-streaming > ol:last-child > li:last-child > ul:last-child > li:last-child:after,
-  .result-streaming
-    > ol:last-child
-    > li:last-child
-    > ul:last-child
-    > li:last-child
-    > ol:last-child
-    > li:last-child:after,
-  .result-streaming
-    > ol:last-child
-    > li:last-child
-    > ul:last-child
-    > li:last-child
-    > ul:last-child
-    > li:last-child:after,
-  .result-streaming > ul:last-child > li:last-child > ol:last-child > li:last-child:after,
-  .result-streaming
-    > ul:last-child
-    > li:last-child
-    > ol:last-child
-    > li:last-child
-    > ol:last-child
-    > li:last-child:after,
-  .result-streaming
-    > ul:last-child
-    > li:last-child
-    > ol:last-child
-    > li:last-child
-    > ul:last-child
-    > li:last-child:after,
-  .result-streaming > ul:last-child > li:last-child > ul:last-child > li:last-child:after,
-  .result-streaming
-    > ul:last-child
-    > li:last-child
-    > ul:last-child
-    > li:last-child
-    > ol:last-child
-    > li:last-child:after,
-  .result-streaming
-    > ul:last-child
-    > li:last-child
-    > ul:last-child
-    > li:last-child
-    > ul:last-child
-    > li:last-child:after,
-  .result-streaming > ul:last-child > li:last-child[*|\:not-has\(]:after {
-    content: '⬤';
-    font-family: system-ui, Inter, Söhne Circle, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-      Noto Sans, sans-serif;
-    line-height: normal;
-    margin-left: 0.25rem;
-    vertical-align: middle;
-    font-size: 0.5rem;
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-  }
-  .result-streaming > ul:last-child > li:last-child:not(:has(* > li)):after {
-    content: '⬤';
-    font-family: system-ui, Inter, Söhne Circle, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-      Noto Sans, sans-serif;
-    line-height: normal;
-    margin-left: 0.25rem;
-    vertical-align: middle;
-    font-size: 0.5rem;
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-  }
-  .result-streaming > ol:last-child > li:last-child[*|\:not-has\(]:after {
-    content: '⬤';
-    font-family: system-ui, Inter, Söhne Circle, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-      Noto Sans, sans-serif;
-    line-height: normal;
-    margin-left: 0.25rem;
-    vertical-align: middle;
-    font-size: 0.5rem;
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-  }
-  .result-streaming > ol:last-child > li:last-child:not(:has(* > li)):after {
+  .result-streaming > :is(ul, ol):last-child > li:last-child:not(:has(> :is(ul, ol, pre))):after {
     content: '⬤';
     font-family: system-ui, Inter, Söhne Circle, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
       Noto Sans, sans-serif;
@@ -1938,6 +1867,7 @@ button.scroll-convo {
     height: 12px;
   }
 }
+
 @supports not (selector(:has(*))) {
   .result-streaming > ol:last-child > li:last-child:after,
   .result-streaming > ul:last-child > li:last-child:after {
@@ -1952,6 +1882,21 @@ button.scroll-convo {
     width: 12px;
     height: 12px;
   }
+
+  .result-streaming > ol:last-child > li:last-child > :is(ul, ol, pre) ~ :after,
+  .result-streaming > ul:last-child > li:last-child > :is(ul, ol, pre) ~ :after {
+    display: none;
+  }
+
+  .result-streaming > ol:last-child > li:last-child > pre:last-child code:after,
+  .result-streaming > ul:last-child > li:last-child > pre:last-child code:after {
+    display: inline-block;
+  }
+}
+
+/* Remove cursors when streaming is complete */
+.result-streaming:not(.submitting) :is(ul, ol) li:after {
+  display: none !important;
 }
 
 .webkit-dark-styles,
@@ -1968,12 +1913,6 @@ button.scroll-convo {
 }
 
 /* Ordered Listing */
-.prose :where(ol):not(:where([class~='not-prose'] *)) {
-  list-style-type: decimal;
-  margin-bottom: 1.25em;
-  margin-top: 0;
-  padding-left: 1.625em;
-}
 .prose :where(ol[type='A']):not(:where([class~='not-prose'] *)) {
   list-style-type: upper-alpha;
 }
@@ -2000,13 +1939,6 @@ button.scroll-convo {
 }
 .prose :where(ol[type='1']):not(:where([class~='not-prose'] *)) {
   list-style-type: decimal;
-}
-.prose :where(ol > li):not(:where([class~='not-prose'] *))::marker {
-  color: var(--tw-prose-counters);
-  font-weight: 400;
-}
-.prose :where(ol > li):not(:where([class~='not-prose'] *)) {
-  padding-left: 0.375em;
 }
 .prose :where(.prose > ol > li > :first-child):not(:where([class~='not-prose'] *)) {
   margin-top: 0;
@@ -2049,92 +1981,158 @@ button.scroll-convo {
   margin-bottom: 1.3333333em;
 }
 
-.markdown .prose ol,
-.markdown .prose p,
-.markdown .prose ul {
-  margin-bottom: 1rem;
+/* Base styles for lists */
+.prose ol,
+.prose ul,
+.markdown ol,
+.markdown ul {
+  list-style-position: outside;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1.625em;
 }
-.markdown .prose ol:last-child,
-.markdown .prose p:last-child,
-.markdown .prose ul:last-child {
-  margin-bottom: 0;
+
+.prose li,
+.markdown li {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 }
-.markdown .prose p {
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  line-height: calc(
-    28px * var(--markdown-font-size, var(--font-size-base)) / var(--font-size-base)
-  );
-}
-.markdown .prose ol,
-.markdown .prose ul {
-  display: contents;
-  list-style-position: inside;
-  list-style-type: none;
-  margin-top: 0;
-}
-.markdown .prose ol > li,
-.markdown .prose ul > li {
-  margin-bottom: 0;
-  margin-top: 0;
-  position: relative;
-}
-.markdown .prose ol > li[\:has\(\.title-citation\)],
-.markdown .prose ul > li[\:has\(\.title-citation\)] {
-  margin-bottom: 0.75rem;
-}
-.markdown .prose ol > li:has(.title-citation),
-.markdown .prose ul > li:has(.title-citation) {
-  margin-bottom: 0.75rem;
-}
-.markdown .prose ol > li[\:has\(\.title-citation\)]:last-child,
-.markdown .prose ul > li[\:has\(\.title-citation\)]:last-child {
-  margin-bottom: 0;
-}
-.markdown .prose ol > li:has(.title-citation):last-child,
-.markdown .prose ul > li:has(.title-citation):last-child {
-  margin-bottom: 0;
-}
-.markdown .prose ol > li:before,
-.markdown .prose ul > li:before {
-  left: 0;
-  position: absolute;
-}
-.markdown .prose ol > li button,
-.markdown .prose ol > li > a,
-.markdown .prose ul > li button,
-.markdown .prose ul > li > a {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-.markdown .prose ol > li p,
-.markdown .prose ul > li p {
-  margin-bottom: 0.5rem;
-  margin-top: 0;
-}
-.markdown .prose ol > li ol,
-.markdown .prose ol > li ul,
-.markdown .prose ul > li ol,
-.markdown .prose ul > li ul {
-  display: block;
-  margin-bottom: 0;
-  margin-left: 1rem;
-  margin-top: 0;
-  padding: 0;
-}
-.markdown .prose ol {
+
+/* Ordered lists */
+.prose ol,
+.markdown ol {
+  list-style-type: decimal;
   counter-reset: list-counter;
 }
-.markdown .prose ol > li {
+
+.prose ol > li,
+.markdown ol > li {
+  position: relative;
+  padding-left: 0.375em;
   counter-increment: list-counter;
-  padding-left: 2rem;
 }
-.markdown .prose ol > li:before {
-  color: var(--text-secondary);
-  content: counter(list-counter) '.';
+
+.prose ol > li::marker,
+.markdown ol > li::marker {
+  content: counter(list-counter) '. ';
+  color: var(--tw-prose-counters);
+  font-weight: 400;
 }
-.markdown .prose ul > li {
-  padding-left: 1.5rem;
+
+/* Nested ordered lists */
+.prose ol ol,
+.markdown ol ol {
+  list-style-type: lower-alpha;
+  counter-reset: list-counter-alpha;
+}
+
+.prose ol ol > li,
+.markdown ol ol > li {
+  counter-increment: list-counter-alpha;
+}
+
+.prose ol ol > li::marker,
+.markdown ol ol > li::marker {
+  content: counter(list-counter-alpha, lower-alpha) '. ';
+}
+
+.prose ol ol ol,
+.markdown ol ol ol {
+  list-style-type: lower-roman;
+  counter-reset: list-counter-roman;
+}
+
+.prose ol ol ol > li,
+.markdown ol ol ol > li {
+  counter-increment: list-counter-roman;
+}
+
+.prose ol ol ol > li::marker,
+.markdown ol ol ol > li::marker {
+  content: counter(list-counter-roman, lower-roman) '. ';
+}
+
+/* Unordered lists */
+.prose ul,
+.markdown ul {
+  list-style-type: disc;
+}
+
+.prose ul > li,
+.markdown ul > li {
+  padding-left: 0.375em;
+}
+
+.prose ul > li::marker,
+.markdown ul > li::marker {
+  color: var(--tw-prose-bullets);
+}
+
+/* Nested unordered lists */
+.prose ul ul,
+.markdown ul ul {
+  list-style-type: circle;
+}
+
+.prose ul ul ul,
+.markdown ul ul ul {
+  list-style-type: square;
+}
+
+/* Nested lists */
+.prose ol ol,
+.prose ul ul,
+.prose ul ol,
+.prose ol ul,
+.markdown ol ol,
+.markdown ul ul,
+.markdown ul ol,
+.markdown ol ul {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+/* Remove extra spacing */
+.prose > ul > li > *:first-child,
+.prose > ol > li > *:first-child,
+.markdown > ul > li > *:first-child,
+.markdown > ol > li > *:first-child {
+  margin-top: 1.25em;
+}
+
+.prose > ul > li > *:last-child,
+.prose > ol > li > *:last-child,
+.markdown > ul > li > *:last-child,
+.markdown > ol > li > *:last-child {
+  margin-bottom: 1.25em;
+}
+
+/* Ensure proper marker color */
+.prose li::marker,
+.markdown li::marker {
+  color: currentColor;
+}
+
+/* Reset counter for new sections */
+.prose h1 + ol,
+.prose h2 + ol,
+.prose h3 + ol,
+.prose h4 + ol,
+.prose h5 + ol,
+.prose h6 + ol,
+.markdown h1 + ol,
+.markdown h2 + ol,
+.markdown h3 + ol,
+.markdown h4 + ol,
+.markdown h5 + ol,
+.markdown h6 + ol {
+  counter-reset: list-counter;
+}
+
+/* Reset counter after unordered lists */
+.prose ul + ol,
+.markdown ul + ol {
+  counter-reset: list-counter;
 }
 
 /* Keyframes */
@@ -2271,30 +2269,30 @@ button.scroll-convo {
 }
 
 .moon-rise {
-  animation: moonRise 4s ease-in-out infinite; /* 'forwards' mantém a lua na posição final após a animação */
-  transform-origin: 45% 50%; /* Ajuste dependendo da posição relativa do morro */
+  animation: moonRise 4s ease-in-out infinite;
+  transform-origin: 45% 50%;
 }
 
 @keyframes moveUp {
   0% {
-    transform: translateY(0.5px); /* Move um pouco para cima */
+    transform: translateY(0.5px);
     opacity: 0.8;
   }
   10% {
-    transform: translateY(0.5px); /* Move um pouco para cima */
+    transform: translateY(0.5px);
     opacity: 1;
   }
   20% {
-    transform: translateY(0px); /* Move um pouco para cima */
+    transform: translateY(0px);
     opacity: 1;
   }
   50% {
-    transform: translateY(0px); /* Move um pouco para cima */
+    transform: translateY(0px);
     opacity: 1;
   }
   60%,
   100% {
-    transform: translateY(0px); /* Move um pouco para cima */
+    transform: translateY(0px);
     opacity: 1;
   }
 }
@@ -2341,3 +2339,101 @@ button.scroll-convo {
   line-height: inherit;
 }
 
+.tooltip {
+  z-index: 50;
+  cursor: pointer;
+  border-radius: 0.275rem;
+  background-color: var(--surface-primary);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: black;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.25);
+}
+
+.tooltip:where(.dark, .dark *) {
+  background-color: var(--surface-primary);
+  color: white;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.35);
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.dark :focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.popover-ui {
+  z-index: 1000;
+  display: flex;
+  max-height: min(var(--popover-available-height, 300px), 300px);
+  flex-direction: column;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--border-light);
+  background-color: hsl(var(--background));
+  padding: 0.5rem;
+  color: var(--text-primary);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transform-origin: top;
+  opacity: 0;
+  transition-property: opacity, scale, translate;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  scale: 0.95;
+  translate: 0 -0.5rem;
+  margin-top: 4px;
+  margin-right: -2px;
+}
+
+.popover-ui:focus-visible,
+.popover-ui[data-focus-visible] {
+  outline: var(--bg-surface-hover);
+  outline-offset: -1px;
+}
+
+.popover-ui:where(.dark, .dark *) {
+  background-color: hsl(var(--background));
+  color: var(--text-secondary);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.select-item {
+  display: flex;
+  cursor: pointer;
+  scroll-margin: 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  outline: none !important;
+}
+
+.select-item[aria-disabled='true'] {
+  opacity: 0.5;
+}
+
+.select-item[data-active-item] {
+  background-color: hsl(var(--accent));
+  color: var(--text-primary);
+}
+
+.popover-ui[data-enter] {
+  opacity: 1;
+  scale: 1;
+  translate: 0;
+}

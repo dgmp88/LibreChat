@@ -1,4 +1,4 @@
-import { memo, useRef, useMemo } from 'react';
+import { memo, useRef, useMemo, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   supportsFiles,
@@ -17,6 +17,7 @@ import {
   useAutoSave,
   useRequiresKey,
   useHandleKeyUp,
+  useQueryParams,
   useSubmitMessage,
 } from '~/hooks';
 import { TextareaAutosize } from '~/components/ui';
@@ -37,11 +38,13 @@ import store from '~/store';
 const ChatForm = ({ index = 0 }) => {
   const submitButtonRef = useRef<HTMLButtonElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  useQueryParams({ textAreaRef });
 
   const SpeechToText = useRecoilValue(store.speechToText);
   const TextToSpeech = useRecoilValue(store.textToSpeech);
   const automaticPlayback = useRecoilValue(store.automaticPlayback);
 
+  const isSearching = useRecoilValue(store.isSearching);
   const [showStopButton, setShowStopButton] = useRecoilState(store.showStopButtonByIndex(index));
   const [showPlusPopover, setShowPlusPopover] = useRecoilState(store.showPlusPopoverFamily(index));
   const [showMentionPopover, setShowMentionPopover] = useRecoilState(
@@ -61,7 +64,7 @@ const ChatForm = ({ index = 0 }) => {
   const { handlePaste, handleKeyDown, handleCompositionStart, handleCompositionEnd } = useTextarea({
     textAreaRef,
     submitButtonRef,
-    disabled: !!requiresKey,
+    disabled: !!(requiresKey ?? false),
   });
 
   const {
@@ -105,12 +108,12 @@ const ChatForm = ({ index = 0 }) => {
   const invalidAssistant = useMemo(
     () =>
       isAssistantsEndpoint(conversation?.endpoint) &&
-      (!conversation?.assistant_id ||
-        !assistantMap[conversation.endpoint ?? ''][conversation.assistant_id ?? '']),
+      (!(conversation?.assistant_id ?? '') ||
+        !assistantMap?.[conversation?.endpoint ?? ''][conversation?.assistant_id ?? '']),
     [conversation?.assistant_id, conversation?.endpoint, assistantMap],
   );
   const disableInputs = useMemo(
-    () => !!(requiresKey || invalidAssistant),
+    () => !!((requiresKey ?? false) || invalidAssistant),
     [requiresKey, invalidAssistant],
   );
 
@@ -120,6 +123,12 @@ const ChatForm = ({ index = 0 }) => {
       methods.setValue('text', e.target.value, { shouldValidate: true });
     },
   });
+
+  useEffect(() => {
+    if (!isSearching && textAreaRef.current && !disableInputs) {
+      textAreaRef.current.focus();
+    }
+  }, [isSearching, disableInputs]);
 
   return (
     <form
@@ -134,7 +143,7 @@ const ChatForm = ({ index = 0 }) => {
               newConversation={generateConversation}
               textAreaRef={textAreaRef}
               commandChar="+"
-              placeholder="com_ui_add"
+              placeholder="com_ui_add_model_preset"
               includeAssistants={false}
             />
           )}
@@ -162,7 +171,6 @@ const ChatForm = ({ index = 0 }) => {
             {endpoint && (
               <TextareaAutosize
                 {...registerProps}
-                autoFocus
                 ref={(e) => {
                   ref(e);
                   textAreaRef.current = e;
