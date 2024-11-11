@@ -8,7 +8,7 @@ export const isUUID = z.string().uuid();
 export enum AuthType {
   OVERRIDE_AUTH = 'override_auth',
   USER_PROVIDED = 'user_provided',
-  SYSTEM_DEFINED = 'SYSTEM_DEFINED',
+  SYSTEM_DEFINED = 'system_defined',
 }
 
 export const authTypeSchema = z.nativeEnum(AuthType);
@@ -232,7 +232,7 @@ export const googleSettings = {
   topK: {
     min: 1,
     max: 40,
-    step: 0.01,
+    step: 1,
     default: 40,
   },
 };
@@ -369,7 +369,7 @@ export const tPluginSchema = z.object({
   pluginKey: z.string(),
   description: z.string(),
   icon: z.string(),
-  authConfig: z.array(tPluginAuthConfigSchema),
+  authConfig: z.array(tPluginAuthConfigSchema).optional(),
   authenticated: z.boolean().optional(),
   isButton: z.boolean().optional(),
 });
