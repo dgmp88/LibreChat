@@ -64,6 +64,7 @@ export type TSubmission = {
   initialResponse?: TMessage;
   conversation: Partial<TConversation>;
   endpointOption: TEndpointOption;
+  clientTimestamp?: string;
 };
 
 export type EventSubmission = Omit<TSubmission, 'initialResponse'> & { initialResponse: TMessage };
@@ -491,9 +492,7 @@ export type TUpdatePromptLabelsResponse = {
   message: string;
 };
 
-export type TDeletePromptGroupResponse = {
-  promptGroup: string;
-};
+export type TDeletePromptGroupResponse = TUpdatePromptLabelsResponse;
 
 export type TDeletePromptGroupRequest = {
   id: string;
