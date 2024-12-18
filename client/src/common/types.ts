@@ -173,13 +173,14 @@ export type AgentPanelProps = {
   setAction: React.Dispatch<React.SetStateAction<t.Action | undefined>>;
   endpointsConfig?: t.TEndpointsConfig;
   setCurrentAgentId: React.Dispatch<React.SetStateAction<string | undefined>>;
+  agentsConfig?: t.TAgentsEndpoint | null;
 };
 
 export type AgentModelPanelProps = {
-  setActivePanel: React.Dispatch<React.SetStateAction<Panel>>;
-  providers: Option[];
-  models: Record<string, string[]>;
   agent_id?: string;
+  providers: Option[];
+  models: Record<string, string[] | undefined>;
+  setActivePanel: React.Dispatch<React.SetStateAction<Panel>>;
 };
 
 export type AugmentedColumnDef<TData, TValue> = ColumnDef<TData, TValue> & DataColumnMeta;
