@@ -50,6 +50,7 @@ const googleModels = {
   gemini: 30720, // -2048 from max
   'gemini-pro-vision': 12288, // -4096 from max
   'gemini-exp': 8000,
+  'gemini-2.0-flash-thinking-exp': 30720, // -2048 from max
   'gemini-2.0': 1048576,
   'gemini-1.5': 1048576,
   'text-bison-32k': 32758, // -10 from max
@@ -81,7 +82,8 @@ const anthropicModels = {
 };
 
 const deepseekModels = {
-  deepseek: 127500,
+  'deepseek-reasoner': 63000, // -1000 from max (API)
+  deepseek: 63000, // -1000 from max (API)
 };
 
 const metaModels = {

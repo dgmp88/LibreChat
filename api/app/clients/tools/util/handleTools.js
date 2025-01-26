@@ -14,6 +14,7 @@ const {
   TraversaalSearch,
   StructuredWolfram,
   TavilySearchResults,
+  OpenWeather,
 } = require('../');
 const { primeFiles: primeCodeFiles } = require('~/server/services/Files/Code/process');
 const { createFileSearchTool, primeFiles: primeSearchFiles } = require('./fileSearch');
@@ -178,6 +179,7 @@ const loadTools = async ({
     'azure-ai-search': StructuredACS,
     traversaal_search: TraversaalSearch,
     tavily_search_results_json: TavilySearchResults,
+    open_weather: OpenWeather,
   };
 
   const customConstructors = {
@@ -228,6 +230,7 @@ const loadTools = async ({
 
   const toolContextMap = {};
   const remainingTools = [];
+  const appTools = options.req?.app?.locals?.availableTools ?? {};
 
   for (const tool of tools) {
     if (tool === Tools.execute_code) {
@@ -259,7 +262,7 @@ const loadTools = async ({
         return createFileSearchTool({ req: options.req, files, entity_id: agent?.id });
       };
       continue;
-    } else if (mcpToolPattern.test(tool)) {
+    } else if (tool && appTools[tool] && mcpToolPattern.test(tool)) {
       requestedTools[tool] = async () =>
         createMCPTool({
           req: options.req,
