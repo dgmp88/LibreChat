@@ -1,0 +1,15 @@
+
+services:
+  api:
+    volumes:
+    - type: bind
+      source: ./api/data/auth.json
+      target: /app/api/data/auth.json
+  
+  client:
+    volumes:
+    - type: bind
+    - /etc/letsencrypt/live/ai.georgep.xyz:/etc/letsencrypt/live/ai.georgep.xyz
+      - /etc/letsencrypt/archive/ai.georgep.xyz:/etc/letsencrypt/archive/ai.georgep.xyz
+      - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
+      - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
