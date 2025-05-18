@@ -9,7 +9,11 @@ services:
   client:
     volumes:
     - type: bind
-    - /etc/letsencrypt/live/ai.georgep.xyz:/etc/letsencrypt/live/ai.georgep.xyz
-      - /etc/letsencrypt/archive/ai.georgep.xyz:/etc/letsencrypt/archive/ai.georgep.xyz
-      - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
-      - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
+      source: /etc/letsencrypt/live/ai.georgep.xyz
+      target: /etc/letsencrypt/live/ai.georgep.xyz
+    - type: bind
+      source: /etc/letsencrypt/archive/ai.georgep.xyz
+      target: /etc/letsencrypt/archive/ai.georgep.xyz
+    - type: bind
+      source: /etc/letsencrypt/options-ssl-nginx.conf
+      target: /etc/letsencrypt/options-ssl-nginx.conf
