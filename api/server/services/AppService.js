@@ -12,6 +12,7 @@ const { initializeFirebase } = require('./Files/Firebase/initialize');
 const loadCustomConfig = require('./Config/loadCustomConfig');
 const handleRateLimits = require('./Config/handleRateLimits');
 const { loadDefaultInterface } = require('./start/interface');
+const { loadTurnstileConfig } = require('./start/turnstile');
 const { azureConfigSetup } = require('./start/azureOpenAI');
 const { processModelSpecs } = require('./start/modelSpecs');
 const { initializeS3 } = require('./Files/S3/initialize');
@@ -23,7 +24,6 @@ const { getMCPManager } = require('~/config');
 const paths = require('~/config/paths');
 
 /**
- *
  * Loads custom config and initializes app-wide variables.
  * @function AppService
  * @param {Express.Application} app - The Express application object.
@@ -52,7 +52,7 @@ const AppService = async (app) => {
 
   if (fileStrategy === FileSources.firebase) {
     initializeFirebase();
-  } else if (fileStrategy === FileSources.azure) {
+  } else if (fileStrategy === FileSources.azure_blob) {
     initializeAzureBlobService();
   } else if (fileStrategy === FileSources.s3) {
     initializeS3();
@@ -66,7 +66,7 @@ const AppService = async (app) => {
   });
 
   if (config.mcpServers != null) {
-    const mcpManager = await getMCPManager();
+    const mcpManager = getMCPManager();
     await mcpManager.initializeMCP(config.mcpServers, processMCPEnv);
     await mcpManager.mapAvailableTools(availableTools);
   }
@@ -74,6 +74,7 @@ const AppService = async (app) => {
   const socialLogins =
     config?.registration?.socialLogins ?? configDefaults?.registration?.socialLogins;
   const interfaceConfig = await loadDefaultInterface(config, configDefaults);
+  const turnstileConfig = loadTurnstileConfig(config, configDefaults);
 
   const defaultLocals = {
     ocr,
@@ -85,6 +86,7 @@ const AppService = async (app) => {
     availableTools,
     imageOutputType,
     interfaceConfig,
+    turnstileConfig,
     balance,
   };
 
@@ -146,7 +148,7 @@ const AppService = async (app) => {
     ...defaultLocals,
     fileConfig: config?.fileConfig,
     secureImageLinks: config?.secureImageLinks,
-    modelSpecs: processModelSpecs(endpoints, config.modelSpecs),
+    modelSpecs: processModelSpecs(endpoints, config.modelSpecs, interfaceConfig),
     ...endpointLocals,
   };
 };
