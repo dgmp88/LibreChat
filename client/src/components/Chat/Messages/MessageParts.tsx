@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
+import { useAtomValue } from 'jotai';
 import { useRecoilValue } from 'recoil';
 import type { TMessageContentParts } from 'librechat-data-provider';
 import type { TMessageProps, TMessageIcon } from '~/common';
+import { useMessageHelpers, useLocalize, useAttachments } from '~/hooks';
 import MessageIcon from '~/components/Chat/Messages/MessageIcon';
-import { useMessageHelpers, useLocalize } from '~/hooks';
 import ContentParts from './Content/ContentParts';
+import { fontSizeAtom } from '~/store/fontSize';
 import SiblingSwitch from './SiblingSwitch';
-
 import MultiMessage from './MultiMessage';
 import HoverButtons from './HoverButtons';
 import SubRow from './SubRow';
@@ -17,7 +18,10 @@ export default function Message(props: TMessageProps) {
   const localize = useLocalize();
   const { message, siblingIdx, siblingCount, setSiblingIdx, currentEditId, setCurrentEditId } =
     props;
-
+  const { attachments, searchResults } = useAttachments({
+    messageId: message?.messageId,
+    attachments: message?.attachments,
+  });
   const {
     edit,
     index,
@@ -34,7 +38,7 @@ export default function Message(props: TMessageProps) {
     regenerateMessage,
   } = useMessageHelpers(props);
 
-  const fontSize = useRecoilValue(store.fontSize);
+  const fontSize = useAtomValue(fontSizeAtom);
   const maximizeChatSpace = useRecoilValue(store.maximizeChatSpace);
   const { children, messageId = null, isCreatedByUser } = message ?? {};
 
@@ -91,7 +95,7 @@ export default function Message(props: TMessageProps) {
       >
         <div className="m-auto justify-center p-4 py-2 md:gap-6">
           <div
-            id={messageId}
+            id={messageId ?? ''}
             aria-label={`message-${message.depth}-${messageId}`}
             className={cn(baseClasses.common, baseClasses.chat, 'message-render')}
           >
@@ -116,12 +120,14 @@ export default function Message(props: TMessageProps) {
                     isLast={isLast}
                     enterEdit={enterEdit}
                     siblingIdx={siblingIdx}
-                    messageId={message.messageId}
+                    attachments={attachments}
                     isSubmitting={isSubmitting}
+                    searchResults={searchResults}
+                    messageId={message.messageId}
                     setSiblingIdx={setSiblingIdx}
-                    attachments={message.attachments}
                     isCreatedByUser={message.isCreatedByUser}
                     conversationId={conversation?.conversationId}
+                    isLatestMessage={messageId === latestMessage?.messageId}
                     content={message.content as Array<TMessageContentParts | undefined>}
                   />
                 </div>
