@@ -3,6 +3,11 @@
 # LibreChat Update Script
 # Automates syncing fork's main branch with upstream and merging main into my-edits
 
+# Ensure we're running with bash (not sh)
+if [ -z "$BASH_VERSION" ]; then
+    exec bash "$0" "$@"
+fi
+
 # Note: We don't use 'set -e' because we want to handle errors explicitly
 # with if statements to provide better error messages
 
