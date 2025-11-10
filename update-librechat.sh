@@ -154,5 +154,37 @@ else
     print_info "Skipping push. You can push later with: git push origin my-edits"
 fi
 
+# Ask if user wants to rebuild
+echo ""
+print_info "Code updated successfully!"
+print_warning "Note: You may need to rebuild the client to see the updated version in the UI."
+read -p "Do you want to rebuild now? (y/n) " -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # Detect if using Docker
+    if [ -f "deploy-compose.yml" ] || [ -f "docker-compose.yml" ]; then
+        print_info "Detected Docker setup. Running: npm run update:docker"
+        if ! npm run update:docker; then
+            print_error "Rebuild failed. You may need to rebuild manually."
+            print_info "For Docker: npm run update:docker"
+            print_info "For local: npm run frontend"
+        else
+            print_success "Rebuild completed successfully!"
+        fi
+    else
+        print_info "Running: npm run frontend"
+        if ! npm run frontend; then
+            print_error "Rebuild failed. You may need to rebuild manually with: npm run frontend"
+        else
+            print_success "Rebuild completed successfully!"
+        fi
+    fi
+else
+    print_info "Skipping rebuild."
+    print_info "To rebuild later:"
+    print_info "  - Docker: npm run update:docker"
+    print_info "  - Local: npm run frontend"
+fi
+
 print_success "Update completed successfully!"
 
